@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "flight_company": "FEA",
+  "flight_company_icon": "fa-solid fa-feather",
+  "flight_number": "FEA123",
+  "class": "Economy",
+  "date": "2024-04-15",
+  "departure_time": "08:00",
+  "departure_airport": "JFK",
+  "arrival_airport": "LAX",
+  "arrival_time": "10:00",
+  "duration": "2 hours",
+  "price": 200.0
+}

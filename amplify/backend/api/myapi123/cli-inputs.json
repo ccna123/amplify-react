@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/items": {
+      "name": "/items",
+      "lambdaFunction": "amplifyreactceb94b49",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "name": "Narita International Airport",
+        "code": "NRT"
+    },
+    {
+        "id": 2,
+        "name": "Tokyo Haneda Airport",
+        "code": "HND"
+    },
+    {
+        "id": 3,
+        "name": "Kansai International Airport",
+        "code": "KIX"
+    },
+    {
+        "id": 4,
+        "name": "Chubu Centrair International Airport",
+        "code": "NGO"
+    },
+    {
+        "id": 5,
+        "name": "Fukuoka Airport",
+        "code": "FUK"
+    }
+]
