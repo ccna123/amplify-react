@@ -4,11 +4,25 @@
   "flight_company_icon": "fa-solid fa-feather",
   "flight_number": "FEA123",
   "class": "Economy",
-  "date": "2024-04-15",
-  "departure_time": "08:00",
-  "departure_airport": "JFK",
-  "arrival_airport": "LAX",
-  "arrival_time": "10:00",
+  "departure": {
+    "airport": "JFK",
+    "airport_full_name": "John F. Kennedy International Airport",
+    "city": "New York",
+    "country": "United States",
+    "date": "2024-04-15",
+    "time": "08:00"
+  },
+  "arrival": {
+    "airport": "LAX",
+    "airport_full_name": "Los Angeles International Airport",
+    "city": "Los Angeles",
+    "country": "United States",
+    "date": "2024-04-15",
+    "time": "10:00"
+  },
   "duration": "2 hours",
-  "price": 200.0
+  "price": 200.0,
+  "seat": "A1",
+  "terminal": "Terminal 1",
+  "gate": "B19"
 }

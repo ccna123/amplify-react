@@ -9,6 +9,7 @@ module.exports = {
         "icon-green": "rgb(32, 109, 116)",
         "icon-bg": "rgb(173, 202, 204)",
         "class-color": "rgb(208, 134, 77)",
+        "ticket-color": "rgb(25, 53, 63)",
       },
     },
   },

@@ -4,7 +4,7 @@ import trip from "../trip.json";
 
 const Trips = () => {
   return (
-    <section className="bg-white rounded-md md:w-[50%] w-full mx-auto">
+    <section>
       <TripCard trip={trip} />
     </section>
   );

@@ -11,6 +11,7 @@ import Main from "./Pages/Main";
 import Trips from "./Pages/Trips";
 import Boarding from "./Pages/BoardingPass";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
 
 Amplify.configure({
   ...awsconfig,
@@ -52,10 +53,12 @@ function App({ signOut, user }) {
     <div className="App bg-gray-800 min-h-screen pt-4 w-full">
       <BrowserRouter router>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/flight" element={<Main />} />
-          <Route path="/trips" element={<Trips />} />
-          <Route path="/boarding" element={<Boarding />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<Main />} />
+            <Route path="/flight" element={<Main />} />
+            <Route path="/trips" element={<Trips />} />
+            <Route path="/boarding" element={<Boarding />} />
+          </Route>
         </Routes>
       </BrowserRouter>
       {/* <NavigationBar />
