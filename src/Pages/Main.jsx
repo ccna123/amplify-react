@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import departures from "../departure.json";
 import arrivals from "../arrival.json";
 import cabins from "../cabin.json";
-import NavigationBar from "../components/NavigationBar";
 import Button from "../components/Button";
 
 const Main = () => {
@@ -12,9 +11,9 @@ const Main = () => {
     cabin: cabins[0]?.name || "",
     date: "",
     travellers: 0,
+    direction: "one-way",
   });
 
-  const [direction, setDirection] = useState("one-way");
   const handleInputChange = (name, value) => {
     setformData({
       ...formData,
@@ -65,25 +64,25 @@ const Main = () => {
             })}
           </select>
         </div>
-        <div className="border border-gray-300 rounded-md flex justify-start flex-col px-4">
-          <p className="text-start mb-2 text-gray-400 text-sm">Cabin</p>
-          <select
-            className="mb-2 focus:outline-none"
-            name="cabin"
-            id=""
-            value={formData.cabin}
-            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
-          >
-            {cabins.map((cabin) => {
-              return (
-                <option key={cabin.id} value={cabin.name}>
-                  {cabin.name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="border border-gray-300 rounded-md flex justify-start flex-col px-4">
+            <p className="text-start mb-2 text-gray-400 text-sm">Cabin</p>
+            <select
+              className="mb-2 focus:outline-none"
+              name="cabin"
+              id=""
+              value={formData.cabin}
+              onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+            >
+              {cabins.map((cabin) => {
+                return (
+                  <option key={cabin.id} value={cabin.name}>
+                    {cabin.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           <div className="border border-gray-300 rounded-md px-4">
             <p className="text-start mb-2 text-gray-400 text-sm">Dates</p>
             <input
@@ -93,7 +92,9 @@ const Main = () => {
               onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             />
           </div>
-          <div className="border border-gray-300 rounded-md px-4">
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="border border-gray-300 rounded-md px-4 ">
             <p className="text-start mb-2 text-gray-400 text-sm">Travellers</p>
             <input
               type="number"
@@ -110,8 +111,8 @@ const Main = () => {
               <input
                 type="radio"
                 name="direction"
-                checked={direction === "one-way"}
-                onChange={() => setDirection("one-way")}
+                checked={formData.direction === "one-way"}
+                onChange={() => handleInputChange("direction", "one-way")}
                 className="focus:outline-none text-black accent-button-green"
               />
             </div>
@@ -120,8 +121,8 @@ const Main = () => {
               <input
                 type="radio"
                 name="direction"
-                checked={direction === "two-way"}
-                onChange={() => setDirection("two-way")}
+                checked={formData.direction === "two-way"}
+                onChange={() => handleInputChange("direction", "two-way")}
                 className="focus:outline-none text-black accent-button-green"
               />
             </div>

@@ -24,5 +24,6 @@
   "price": 200.0,
   "seat": "A1",
   "terminal": "Terminal 1",
-  "gate": "B19"
+  "gate": "B19",
+  "travellers": 4
 }
