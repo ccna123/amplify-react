@@ -5,7 +5,7 @@ import cabins from "../cabin.json";
 import Button from "../components/Button";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
-const Main = () => {
+const Main = ({ booking }) => {
   const [formData, setformData] = useState({
     departure: departures[0]?.name || "",
     arrival: arrivals[0]?.name || "",
@@ -23,7 +23,7 @@ const Main = () => {
   };
 
   const handleBook = () => {
-    console.log(formData);
+    booking(formData);
   };
 
   return (

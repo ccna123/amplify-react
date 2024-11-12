@@ -23,25 +23,14 @@ Amplify.configure({
 });
 
 function App({ signOut, user }) {
-  const [data, setData] = useState([]);
-
-  const getAll = async () => {
+  const booking = async (formData) => {
     try {
-      const response = await API.get("myapi123", "/items");
-      setData(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getSingle = async () => {
-    try {
-      const response = await API.get("myapi123", "/items", {
-        queryStringParameters: {
-          id: 1,
+      const response = await API.post("myapi123", "/items", {
+        body: formData,
+        headers: {
+          "Content-Type": "application/json",
         },
       });
-      setData(Array.isArray(response) ? response : [response]);
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +41,7 @@ function App({ signOut, user }) {
       <BrowserRouter router>
         <Routes>
           <Route element={<Layout signOut={signOut} />}>
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<Main booking={booking} />} />
             <Route path="/trips" element={<Trips />} />
             <Route path="/boarding" element={<Boarding />} />
           </Route>
