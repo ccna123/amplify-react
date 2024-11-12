@@ -1,11 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Amplify, API, Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { useState } from "react";
-import NavigationBar from "./components/NavigationBar";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Main from "./Pages/Main";
 import Trips from "./Pages/Trips";
@@ -53,19 +51,13 @@ function App({ signOut, user }) {
     <div className="App bg-gray-800 min-h-screen pt-4 w-full">
       <BrowserRouter router>
         <Routes>
-          <Route element={<Layout />}>
+          <Route element={<Layout signOut={signOut} />}>
             <Route path="/" element={<Main />} />
-            <Route path="/flight" element={<Main />} />
             <Route path="/trips" element={<Trips />} />
             <Route path="/boarding" element={<Boarding />} />
           </Route>
         </Routes>
       </BrowserRouter>
-      {/* <NavigationBar />
-      <h1>Hello {user.username}</h1>
-      <button onClick={signOut}>Sign out</button>
-      <button onClick={getAll}>GET ALL</button>
-      <button onClick={getSingle}>GET SINGLE</button> */}
     </div>
   );
 }

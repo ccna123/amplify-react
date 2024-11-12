@@ -4,7 +4,7 @@ import BottomNav from "./BottomNav";
 import bottom_item from "../bottom_item.json";
 import NavigationBar from "./NavigationBar";
 
-const Layout = () => {
+const Layout = ({ signOut }) => {
   const [isClicked, setIsClicked] = useState(null);
 
   //check url to determine which bottom nav is clicked
@@ -19,7 +19,7 @@ const Layout = () => {
 
   return (
     <div className="bg-white rounded-md md:w-[50%] w-full mx-auto">
-      <NavigationBar />
+      <NavigationBar signOut={signOut} />
       <Outlet />
       <div className="flex justify-around bg-bottom-nav rounded-md p-2 hover:cursor-pointer">
         {bottom_item.map((item, index) => {

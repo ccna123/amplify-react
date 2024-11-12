@@ -3,6 +3,7 @@ import departures from "../departure.json";
 import arrivals from "../arrival.json";
 import cabins from "../cabin.json";
 import Button from "../components/Button";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 const Main = () => {
   const [formData, setformData] = useState({
