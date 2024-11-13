@@ -16,13 +16,17 @@
         "amplifyreact38652a62": {}
       },
       "function": {
-        "amplifyreactceb94b49": {
+        "bookingFunc": {
+          "tableName": "booking",
           "deploymentBucketName": "amplify-amplifyreact-dev-5a4e5-deployment",
-          "s3Key": "amplify-builds/amplifyreactceb94b49-476647757438334d4772-build.zip"
+          "s3Key": "amplify-builds/bookingFunc-4d6665457233474e7868-build.zip"
         }
       },
       "api": {
         "myapi123": {}
+      },
+      "storage": {
+        "dynamoe261991e": {}
       }
     }
   }

@@ -18,7 +18,7 @@ const Layout = ({ signOut }) => {
   }, [currentUrl]);
 
   return (
-    <div className="bg-white rounded-md md:w-[50%] w-full mx-auto">
+    <div className="bg-white rounded-md md:w-[60%] w-full mx-auto">
       <NavigationBar signOut={signOut} />
       <Outlet />
       <div className="flex justify-around bg-bottom-nav rounded-md p-2 hover:cursor-pointer">

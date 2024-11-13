@@ -15,6 +15,17 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "tableName": {
+      "Type": "String"
+    },
+    "storagedynamoe261991eName": {
+      "Type": "String",
+      "Default": "storagedynamoe261991eName"
+    },
+    "storagedynamoe261991eArn": {
+      "Type": "String",
+      "Default": "storagedynamoe261991eArn"
     }
   },
   "Conditions": {
@@ -47,12 +58,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifyreactceb94b49",
+            "bookingFunc",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifyreactceb94b49",
+                  "bookingFunc",
                   "-",
                   {
                     "Ref": "env"
@@ -69,6 +80,9 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "tableName": {
+              "Ref": "tableName"
             }
           }
         },
@@ -89,12 +103,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifyreactLambdaRolef3ddea6e",
+            "amplifyreactLambdaRole70a9e18f",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifyreactLambdaRolef3ddea6e",
+                  "amplifyreactLambdaRole70a9e18f",
                   "-",
                   {
                     "Ref": "env"
@@ -160,6 +174,34 @@
                   }
                 ]
               }
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:DescribeTable",
+                "dynamodb:GetItem",
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem"
+              ],
+              "Resource": [
+                {
+                  "Ref": "storagedynamoe261991eArn"
+                },
+                {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      {
+                        "Ref": "storagedynamoe261991eArn"
+                      },
+                      "*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }

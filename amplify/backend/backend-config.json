@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "amplifyreactceb94b49"
+          "resourceName": "bookingFunc"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -44,28 +44,56 @@
     }
   },
   "function": {
-    "amplifyreactceb94b49": {
+    "bookingFunc": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "dynamoe261991e"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_amplifyreactceb94b49_deploymentBucketName": {
+    "AMPLIFY_function_bookingFunc_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "amplifyreactceb94b49"
+          "resourceName": "bookingFunc"
         }
       ]
     },
-    "AMPLIFY_function_amplifyreactceb94b49_s3Key": {
+    "AMPLIFY_function_bookingFunc_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "amplifyreactceb94b49"
+          "resourceName": "bookingFunc"
         }
       ]
+    },
+    "AMPLIFY_function_bookingFunc_tableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "bookingFunc"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "dynamoe261991e": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

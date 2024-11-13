@@ -3,7 +3,6 @@ import { Amplify, API, Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Main from "./Pages/Main";
 import Trips from "./Pages/Trips";
@@ -23,27 +22,14 @@ Amplify.configure({
 });
 
 function App({ signOut, user }) {
-  const booking = async (formData) => {
-    try {
-      const response = await API.post("myapi123", "/items", {
-        body: formData,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="App bg-gray-800 min-h-screen pt-4 w-full">
       <BrowserRouter router>
         <Routes>
           <Route element={<Layout signOut={signOut} />}>
-            <Route path="/" element={<Main booking={booking} />} />
+            <Route path="/flight" element={<Main user={user} />} />
             <Route path="/trips" element={<Trips />} />
-            <Route path="/boarding" element={<Boarding />} />
+            <Route path="/boarding" element={<Boarding user={user} />} />
           </Route>
         </Routes>
       </BrowserRouter>

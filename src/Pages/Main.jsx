@@ -3,9 +3,9 @@ import departures from "../departure.json";
 import arrivals from "../arrival.json";
 import cabins from "../cabin.json";
 import Button from "../components/Button";
-import { withAuthenticator } from "@aws-amplify/ui-react";
+import { API } from "aws-amplify";
 
-const Main = ({ booking }) => {
+const Main = ({ user }) => {
   const [formData, setformData] = useState({
     departure: departures[0]?.name || "",
     arrival: arrivals[0]?.name || "",
@@ -22,8 +22,55 @@ const Main = ({ booking }) => {
     });
   };
 
-  const handleBook = () => {
-    booking(formData);
+  function departureAirportDetail(departureAirportName) {
+    return departures.find((airport) => airport.name === departureAirportName);
+  }
+
+  function arrivalAirportDetail(arrivalAirportName) {
+    return arrivals.find((airport) => airport.name === arrivalAirportName);
+  }
+
+  const departureDetail = departureAirportDetail(formData.departure);
+  const arrivalDetail = arrivalAirportDetail(formData.arrival);
+
+  const handleBook = async (formData) => {
+    const bookingDetail = {
+      userId: user.username,
+      flight_company: "FEA",
+      flight_company_icon: "fa-solid fa-feather",
+      flight_number: "FEA123",
+      class: formData.cabin,
+      departure: {
+        airport: departureDetail.code,
+        airport_full_name: formData.departure,
+        city: departureDetail.city,
+        country: departureDetail.country,
+        date: formData.date,
+        time: "08:00",
+      },
+      arrival: {
+        airport: arrivalDetail.code,
+        airport_full_name: formData.arrival,
+        city: arrivalDetail.city,
+        country: arrivalDetail.country,
+        date: formData.date,
+        time: "10:00",
+      },
+      duration: "2 hours",
+      travellers: formData.travellers,
+      direction: formData.direction,
+    };
+
+    try {
+      const response = await API.post("myapi123", "/booking", {
+        body: bookingDetail,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -129,7 +176,7 @@ const Main = ({ booking }) => {
             </div>
           </div>
         </div>
-        <Button text="Book" handleBook={handleBook} />
+        <Button text="Book" handleBook={handleBook} formData={formData} />
       </div>
     </section>
   );
