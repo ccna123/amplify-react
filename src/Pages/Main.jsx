@@ -1,4 +1,4 @@
-import React, { useState, useTransition } from "react";
+import React, { useState } from "react";
 import departures from "../departure.json";
 import arrivals from "../arrival.json";
 import cabins from "../cabin.json";

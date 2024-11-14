@@ -1,6 +1,4 @@
 const generateRandomTime = () => {
-  console.log("hahahha");
-
   const startHour = 6; // 6 AM
   const endHour = 22; // 10 PM
   const randomHour =
@@ -65,7 +63,7 @@ function getRandomPrice() {
   return (Math.random() * (500 - 100) + 100).toFixed(2); // generates price between 100 and 500, rounded to 2 decimals
 }
 
-export {
+module.exports = {
   generateRandomTime,
   calculateArrivalTime,
   calculateDuration,
