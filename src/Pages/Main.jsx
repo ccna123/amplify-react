@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import notify from "../helper/notify";
 import {
+  calculateArrivalDate,
   calculateArrivalTime,
   calculateDuration,
   generateRandomTime,
@@ -46,6 +47,7 @@ const Main = ({ user }) => {
     const durationInMinutes = 120; // Fixed duration of 2 hours
     const arrivalTime = calculateArrivalTime(departureTime, durationInMinutes); // Calculate arrival time
     const duration = calculateDuration(departureTime, arrivalTime); // Calculate duration
+    const arrivalDate = calculateArrivalDate(formData.date, duration);
 
     const bookingDetail = {
       userId: user.username,
@@ -66,7 +68,7 @@ const Main = ({ user }) => {
         airport_full_name: formData.arrival,
         city: arrivalDetail.city,
         country: arrivalDetail.country,
-        date: formData.date,
+        date: arrivalDate,
         time: arrivalTime, // Use calculated arrival time
       },
       duration: duration, // Use calculated duration
@@ -173,23 +175,27 @@ const Main = ({ user }) => {
             />
           </div>
           <div className="border border-gray-300 rounded-md justify-start px-4">
-            <div className="flex items-center justify-between">
-              <label htmlFor="">One-way</label>
+            <div
+              onClick={() => handleInputChange("direction", "one-way")}
+              className="flex items-center justify-between cursor-pointer"
+            >
+              One-way
               <input
                 type="radio"
                 name="direction"
                 checked={formData.direction === "one-way"}
-                onChange={() => handleInputChange("direction", "one-way")}
                 className="focus:outline-none text-black accent-button-green"
               />
             </div>
-            <div className="flex items-center justify-between">
-              <label htmlFor="">Two-way</label>
+            <div
+              onClick={() => handleInputChange("direction", "two-way")}
+              className="flex items-center justify-between cursor-pointer"
+            >
+              Two-way
               <input
                 type="radio"
                 name="direction"
                 checked={formData.direction === "two-way"}
-                onChange={() => handleInputChange("direction", "two-way")}
                 className="focus:outline-none text-black accent-button-green"
               />
             </div>

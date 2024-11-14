@@ -19,6 +19,27 @@ const calculateArrivalTime = (departureTime, duration) => {
     .padStart(2, "0")}`;
 };
 
+const calculateArrivalDate = (departureDate, durationInHours) => {
+  // Ensure departureDate is in a valid format
+  const departure = new Date(departureDate);
+
+  // Check if the date is valid
+  if (isNaN(departure.getTime())) {
+    throw new Error("Invalid departure date");
+  }
+
+  const durationInMilliseconds = parseInt(durationInHours) * 60 * 60 * 1000; // Convert hours to milliseconds
+
+  const arrivalDate = new Date(departure.getTime() + durationInMilliseconds); // Add duration to departure date
+
+  // Check if the arrival date is valid
+  if (isNaN(arrivalDate.getTime())) {
+    throw new Error("Invalid arrival date");
+  }
+
+  return arrivalDate.toISOString().split("T")[0]; // Return in YYYY-MM-DD format
+};
+
 const calculateDuration = (departureTime, arrivalTime) => {
   const [depHours, depMinutes] = departureTime.split(":").map(Number);
   const [arrHours, arrMinutes] = arrivalTime.split(":").map(Number);
@@ -38,4 +59,9 @@ const calculateDuration = (departureTime, arrivalTime) => {
   return `${durationHours} hours ${durationRemainingMinutes} minutes`;
 };
 
-export { generateRandomTime, calculateArrivalTime, calculateDuration };
+export {
+  generateRandomTime,
+  calculateArrivalTime,
+  calculateDuration,
+  calculateArrivalDate,
+};

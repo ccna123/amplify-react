@@ -3,7 +3,7 @@ import React from "react";
 const TicketCard = ({ trip }) => {
   return (
     <div className="text-white">
-      <div className="bg-ticket-color rounded-lg mx-4 my-2 p-3 ">
+      <div className="bg-ticket-color rounded-lg mx-4 my-2 p-3">
         <section className="flex justify-between">
           <div>
             <i className={`${trip.flight_company_icon} mr-2`} />

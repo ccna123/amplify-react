@@ -1,10 +1,23 @@
+import { API } from "aws-amplify";
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-const NavigationBar = ({ signOut, handleCancel }) => {
+const NavigationBar = ({ signOut, user }) => {
   const location = useLocation();
 
   const trip = localStorage.getItem("trip");
+
+  const handleCancel = async () => {
+    const response = await API.del(
+      "myapi123",
+      `/booking?userId=${user.username}`
+    );
+
+    if (response.statusCode === 200) {
+      localStorage.removeItem("trip");
+      window.location.reload();
+    }
+  };
 
   return (
     <section className="px-2 py-1">
