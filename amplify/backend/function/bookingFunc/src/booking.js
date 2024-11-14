@@ -3,38 +3,24 @@
  */
 
 const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
+const {
+  getRandomSeat,
+  getRandomTerminal,
+  getRandomGate,
+  getRandomPrice,
+} = require("./helper/addExtraInfo");
 
 const client = new DynamoDBClient();
-const tableName = process.env.tableName;
-
-function getRandomPrice() {
-  return (Math.random() * (500 - 100) + 100).toFixed(2); // generates price between 100 and 500, rounded to 2 decimals
+let tableName = process.env.tableName;
+if (process.env.ENV && process.env.ENV !== "NONE") {
+  tableName = tableName + "-" + process.env.ENV;
 }
 
 // Function to generate a random seat number in format like A1, B12, C15
-function getRandomSeat() {
-  const seats = ["A", "B", "C", "D", "E"]; // seat sections
-  const row = Math.floor(Math.random() * 30) + 1; // random row between 1 and 30
-  const seat = seats[Math.floor(Math.random() * seats.length)]; // randomly select a section
-  return `${seat}${row}`;
-}
-
-// Function to generate a random terminal
-function getRandomTerminal() {
-  const terminals = ["Terminal 1", "Terminal 2", "Terminal 3"]; // list of terminals
-  return terminals[Math.floor(Math.random() * terminals.length)];
-}
-
-// Function to generate a random gate, like A1, B15, etc.
-function getRandomGate() {
-  const gates = ["A", "B", "C", "D", "E"]; // gate sections
-  const gate = Math.floor(Math.random() * 20) + 1; // gate number between 1 and 20
-  const section = gates[Math.floor(Math.random() * gates.length)]; // randomly select section
-  return `${section}${gate}`;
-}
 
 exports.handler = async (event) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
+  console.log("Bookinghandler:", tableName);
 
   try {
     // Parse form data from the event body
@@ -67,6 +53,8 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify({
         message: "Booking saved successfully",
+        statusCode: 201,
+        data: formData,
       }),
     };
   } catch (error) {

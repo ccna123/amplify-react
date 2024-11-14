@@ -24,7 +24,11 @@ const TicketCard = ({ trip }) => {
             </p>
           </div>
           <div className="w-fit mx-auto flex items-center">
-            <i className="fa-solid fa-arrows-up-down text-3xl" />
+            {trip.direction === "one-way" ? (
+              <i className="fa-solid fa-arrow-down text-3xl" />
+            ) : (
+              <i className="fa-solid fa-arrows-up-down text-3xl" />
+            )}
             <p className="text-sm ml-2">{trip.duration}</p>
           </div>
           <div className="flex items-start flex-col">

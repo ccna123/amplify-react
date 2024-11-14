@@ -1,18 +1,12 @@
 [
   {
     "id": 1,
-    "name": "Find flight",
+    "name": "Book flight",
     "icon": "fa-solid fa-plane-departure",
     "link": "/flight"
   },
   {
     "id": 2,
-    "name": "Trips",
-    "icon": "fa-solid fa-suitcase",
-    "link": "/trips"
-  },
-  {
-    "id": 3,
     "name": "Boarding pass",
     "icon": "fa-solid fa-ticket",
     "link": "/boarding"

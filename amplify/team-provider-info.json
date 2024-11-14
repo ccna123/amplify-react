@@ -19,7 +19,7 @@
         "bookingFunc": {
           "tableName": "booking",
           "deploymentBucketName": "amplify-amplifyreact-dev-5a4e5-deployment",
-          "s3Key": "amplify-builds/bookingFunc-4d6665457233474e7868-build.zip"
+          "s3Key": "amplify-builds/bookingFunc-76753558556777764d50-build.zip"
         }
       },
       "api": {

@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import departures from "../departure.json";
 import arrivals from "../arrival.json";
 import cabins from "../cabin.json";
 import Button from "../components/Button";
 import { API } from "aws-amplify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import notify from "../helper/notify";
+import {
+  calculateArrivalTime,
+  calculateDuration,
+  generateRandomTime,
+} from "../helper/calculateTime";
 
 const Main = ({ user }) => {
   const [formData, setformData] = useState({
@@ -34,6 +42,11 @@ const Main = ({ user }) => {
   const arrivalDetail = arrivalAirportDetail(formData.arrival);
 
   const handleBook = async (formData) => {
+    const departureTime = generateRandomTime(); // Generate random departure time
+    const durationInMinutes = 120; // Fixed duration of 2 hours
+    const arrivalTime = calculateArrivalTime(departureTime, durationInMinutes); // Calculate arrival time
+    const duration = calculateDuration(departureTime, arrivalTime); // Calculate duration
+
     const bookingDetail = {
       userId: user.username,
       flight_company: "FEA",
@@ -46,7 +59,7 @@ const Main = ({ user }) => {
         city: departureDetail.city,
         country: departureDetail.country,
         date: formData.date,
-        time: "08:00",
+        time: departureTime, // Use generated departure time
       },
       arrival: {
         airport: arrivalDetail.code,
@@ -54,27 +67,33 @@ const Main = ({ user }) => {
         city: arrivalDetail.city,
         country: arrivalDetail.country,
         date: formData.date,
-        time: "10:00",
+        time: arrivalTime, // Use calculated arrival time
       },
-      duration: "2 hours",
+      duration: duration, // Use calculated duration
       travellers: formData.travellers,
       direction: formData.direction,
     };
 
-    try {
-      const response = await API.post("myapi123", "/booking", {
-        body: bookingDetail,
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const response = API.post("myapi123", "/booking", {
+      body: bookingDetail,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.statusCode === 201) {
+          notify(response.message, "create");
+          localStorage.setItem("trip", JSON.stringify(response.data));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
     <section>
+      <ToastContainer />
       <div className="gap-3 flex flex-col px-4 pb-4 relative">
         <div className="border border-gray-300 rounded-md flex justify-start flex-col px-4">
           <p className="text-start mb-2 text-gray-400 text-sm">Departure</p>

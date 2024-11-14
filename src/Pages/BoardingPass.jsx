@@ -3,21 +3,21 @@ import TicketCard from "../components/TicketCard";
 import { API } from "aws-amplify";
 
 const BoardingPass = ({ user }) => {
-  const [trip, setTrip] = useState({});
+  const [trip, setTrip] = useState(null);
 
   const fetchBooking = async () => {
-    console.log("hahahah");
-
     try {
       const response = await API.get(
         "myapi123",
         `/booking?userId=${user.username}`
       );
-      setTrip(JSON.parse(response.details));
-
-      localStorage.setItem("trip", response.details);
+      if (response.statusCode !== 404) {
+        setTrip(JSON.parse(response.details));
+      }
+      return null;
     } catch (error) {
       console.log(error);
+      return null;
     }
   };
 
@@ -27,20 +27,22 @@ const BoardingPass = ({ user }) => {
       try {
         const parsedTrip = JSON.parse(storedTrip);
         setTrip(parsedTrip);
-        console.log("Trip from local storage:", parsedTrip);
       } catch (error) {
         console.log("Error parsing stored trip:", error);
       }
     } else {
       fetchBooking();
     }
-    return () => {
-      localStorage.removeItem("trip");
-    };
   }, []);
 
   return (
-    <div>{Object.keys(trip).length > 0 && <TicketCard trip={trip} />}</div>
+    <div>
+      {trip && Object.keys(trip).length > 0 ? (
+        <TicketCard trip={trip} />
+      ) : (
+        <p className="font-bold my-3">No booking found</p>
+      )}
+    </div>
   );
 };
 
