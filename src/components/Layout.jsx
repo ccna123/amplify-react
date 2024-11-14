@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, replace, useNavigate } from "react-router-dom";
 import BottomNav from "./BottomNav";
 import bottom_item from "../bottom_item.json";
 import NavigationBar from "./NavigationBar";
@@ -7,6 +7,7 @@ import NavigationBar from "./NavigationBar";
 const Layout = ({ signOut, user }) => {
   const [isClicked, setIsClicked] = useState(null);
   const currentUrl = window.location.pathname;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const matchingItem = bottom_item.find((item) => item.link === currentUrl);

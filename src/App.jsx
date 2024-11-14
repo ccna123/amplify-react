@@ -6,7 +6,7 @@ import "@aws-amplify/ui-react/styles.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Main from "./Pages/Main";
 import Boarding from "./Pages/BoardingPass";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 
 Amplify.configure({
@@ -23,8 +23,9 @@ Amplify.configure({
 function App({ signOut, user }) {
   return (
     <div className="App bg-gray-800 min-h-screen pt-4 w-full">
-      <BrowserRouter router>
+      <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Navigate to="/flight" replace />} />
           <Route element={<Layout signOut={signOut} user={user} />}>
             <Route path="/flight" element={<Main user={user} />} />
             <Route path="/boarding" element={<Boarding user={user} />} />
