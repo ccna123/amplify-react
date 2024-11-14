@@ -3,7 +3,8 @@
     "id": 1,
     "name": "Narita International Airport",
     "code": "NRT",
-    "city": "Narita"
+    "city": "Narita",
+    "country": "Japan"
   },
   {
     "id": 2,
