@@ -229,6 +229,7 @@ const Main = ({ user }) => {
             >
               One-way
               <input
+                readOnly={true}
                 type="radio"
                 name="direction"
                 checked={formData.direction === "one-way"}
@@ -241,6 +242,7 @@ const Main = ({ user }) => {
             >
               Two-way
               <input
+                readOnly={true}
                 type="radio"
                 name="direction"
                 checked={formData.direction === "two-way"}

@@ -15,7 +15,10 @@ const TicketCard = ({ trip }) => {
         </section>
         <section>
           <div className="flex items-start flex-col">
-            <p className="text-3xl">{trip.departure.airport}</p>
+            <div className="flex items-center gap-4">
+              <p className="text-3xl">{trip.departure.airport}</p>
+              <i className="fa-solid fa-plane-departure text-2xl" />
+            </div>
             <p className="text-sm text-gray-400">
               {trip.departure.airport_full_name}
             </p>
@@ -32,7 +35,11 @@ const TicketCard = ({ trip }) => {
             <p className="text-sm ml-2">{trip.duration}</p>
           </div>
           <div className="flex items-start flex-col">
-            <p className="text-3xl">{trip.arrival.airport}</p>
+            <div className="flex items-center gap-4">
+              <p className="text-3xl">{trip.arrival.airport}</p>
+              <i className="fa-solid fa-plane-arrival text-2xl" />
+            </div>
+
             <p className="text-sm text-gray-400">
               {trip.arrival.airport_full_name}
             </p>
