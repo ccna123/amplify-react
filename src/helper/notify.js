@@ -17,7 +17,7 @@ const notify = (message, type) => {
 
       break;
 
-    case "delete":
+    case "error":
       toast.error(message, {
         position: "top-right",
         autoClose: 5000,

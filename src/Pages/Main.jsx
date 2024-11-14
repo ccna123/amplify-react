@@ -24,11 +24,29 @@ const Main = ({ user }) => {
     direction: "one-way",
   });
 
+  const [errors, setErrors] = useState({
+    date: false,
+    travellers: false,
+  });
+
   const handleInputChange = (name, value) => {
     setformData({
       ...formData,
       [name]: value,
     });
+
+    if (name === "date") {
+      setErrors({
+        ...errors,
+        date: false,
+      });
+    }
+    if (name === "travellers") {
+      setErrors({
+        ...errors,
+        travellers: false,
+      });
+    }
   };
 
   function departureAirportDetail(departureAirportName) {
@@ -43,6 +61,28 @@ const Main = ({ user }) => {
   const arrivalDetail = arrivalAirportDetail(formData.arrival);
 
   const handleBook = async (formData) => {
+    if (!formData.date) {
+      notify("Please select a date", "error");
+      setErrors({
+        ...errors,
+        date: true,
+      });
+      return;
+    }
+
+    if (formData.travellers <= 0) {
+      notify("Please select number of travellers", "error");
+      setErrors({
+        ...errors,
+        travellers: true,
+      });
+      setformData({
+        ...formData,
+        travellers: 0,
+      });
+      return;
+    }
+
     const departureTime = generateRandomTime(); // Generate random departure time
     const durationInMinutes = 120; // Fixed duration of 2 hours
     const arrivalTime = calculateArrivalTime(departureTime, durationInMinutes); // Calculate arrival time
@@ -152,7 +192,11 @@ const Main = ({ user }) => {
               })}
             </select>
           </div>
-          <div className="border border-gray-300 rounded-md px-4">
+          <div
+            className={`border ${
+              errors.date ? "border-red-400" : "border-gray-300"
+            }  rounded-md px-4`}
+          >
             <p className="text-start mb-2 text-gray-400 text-sm">Dates</p>
             <input
               type="date"
@@ -163,13 +207,17 @@ const Main = ({ user }) => {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <div className="border border-gray-300 rounded-md px-4 ">
+          <div
+            className={`border ${
+              errors.travellers ? "border-red-400" : "border-gray-300"
+            }  rounded-md px-4 `}
+          >
             <p className="text-start mb-2 text-gray-400 text-sm">Travellers</p>
             <input
               type="number"
               className="focus:outline-none text-black w-full"
               min={0}
-              defaultValue={formData.travellers}
+              value={formData.travellers}
               name="travellers"
               onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             />
