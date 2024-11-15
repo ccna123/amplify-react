@@ -25,7 +25,16 @@ function App({ signOut, user }) {
     <div className="App bg-gray-800 min-h-screen pt-4 w-full">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/flight" replace />} />
+          <Route
+            path="/"
+            element={
+              user ? (
+                <Navigate to="/flight" replace />
+              ) : (
+                <div>Welcome! Please log in.</div>
+              )
+            }
+          />
           <Route element={<Layout signOut={signOut} user={user} />}>
             <Route path="/flight" element={<Main user={user} />} />
             <Route path="/boarding" element={<Boarding user={user} />} />
